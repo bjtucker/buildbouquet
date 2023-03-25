@@ -32,7 +32,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --no-cache-dir -r requirements.txt
+          pip install markdownlint
+
       - name: Lint README.md
         run: |
           mdl README.md
