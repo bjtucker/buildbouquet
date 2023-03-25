@@ -18,15 +18,9 @@ jobs:
       - name: Check pip cache directory permissions
         run: |
           if [ -d ~/.cache/pip ]; then ls -ld ~/.cache/pip; else echo "Directory does not exist"; fi
-
       - name: Search for package
         run: |
           curl -s "https://pypi.org/search/?q=markdownlint&submit=" | grep "<a href=\"/project/markdownlint" | sed "s/.*\/project\///" | sed "s/\".*//"
-
-      - name: Update requirements.txt
-        run: |
-          sed -i "s/markdownlint-py/markdownlint/" requirements.txt
-
       - name: Check pip version
         run: pip --version
 
@@ -39,8 +33,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --no-cache-dir -r requirements.txt
-
       - name: Lint README.md
         run: |
           mdl README.md
-
