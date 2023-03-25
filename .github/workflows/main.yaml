@@ -9,6 +9,21 @@ on:
       - main
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.9
+    steps:
+      - name: Print PATH
+        run: echo $PATH
+      - name: Check installed npm packages
+        run: npm list -g --depth=0
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+      - name: Check installed npm packages after installation
+        run: npm list -g --depth=0
+      - name: Lint README.md
+        run: markdownlint-cli README.md
   lint:
     runs-on: ubuntu-latest
     container:
@@ -23,5 +38,3 @@ jobs:
 
       - name: Lint README.md
         run: markdownlint-cli README.md
-
-
