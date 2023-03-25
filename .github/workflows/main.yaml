@@ -11,17 +11,14 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    container:
-      image: python:3.9
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: |
-          pip install --no-cache-dir pymarkdownlint
+        run: sudo apt-get update && sudo apt-get install -y markdownlint
 
       - name: Lint README.md
         run: |
-          pymarkdownlint README.md
+          mdl README.md
