@@ -15,25 +15,13 @@ jobs:
       image: python:3.9
 
     steps:
-      - name: Check pip cache directory permissions
-        run: |
-          if [ -d ~/.cache/pip ]; then ls -ld ~/.cache/pip; else echo "Directory does not exist"; fi
-      - name: Search for package
-        run: |
-          curl -s "https://pypi.org/search/?q=markdownlint&submit=" | grep "<a href=\"/project/markdownlint" | sed "s/.*\/project\///" | sed "s/\".*//"
-      - name: Check pip version
-        run: pip --version
-
-      - name: List installed packages
-        run: pip list
-
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install dependencies
         run: |
-          pip install --no-cache-dir markdownlint
+          pip install --no-cache-dir pymarkdownlint
 
       - name: Lint README.md
         run: |
-          mdl README.md
+          pymarkdownlint README.md
