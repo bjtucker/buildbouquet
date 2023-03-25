@@ -15,6 +15,16 @@ jobs:
       image: python:3.9
 
     steps:
+      - name: Check pip cache directory permissions
+        run: |
+          if [ -d ~/.cache/pip ]; then ls -ld ~/.cache/pip; else echo "Directory does not exist"; fi
+
+      - name: Check pip version
+        run: pip --version
+
+      - name: List installed packages
+        run: pip list
+
       - name: Checkout code
         uses: actions/checkout@v2
 
