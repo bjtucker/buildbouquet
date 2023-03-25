@@ -11,15 +11,17 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    container:
+      image: node:16
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y markdownlint-cli
-
+        run: npm install -g markdownlint-cli
 
       - name: Lint README.md
-        run: |
-          mdl README.md
+        run: markdownlint-cli README.md
+
+
