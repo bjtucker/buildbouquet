@@ -24,17 +24,13 @@ jobs:
           pip install -r requirements.txt
 
       - name: Lint README.md
-        run: |
-          mdl README.md
+        run: mdl README.md
 
-    # Optional step to view the pip cache directory permissions for troubleshooting
-    - name: Check pip cache directory permissions
-      run: ls -ld ~/.cache/pip
+      - name: Check pip cache directory permissions
+        run: ls -ld ~/.cache/pip
 
-    # Optional step to view the pip version for troubleshooting
-    - name: Check pip version
-      run: pip --version
+      - name: Check pip version
+        run: pip --version
 
-    # Optional step to view the installed packages for troubleshooting
-    - name: List installed packages
-      run: pip list
+      - name: List installed packages
+        run: pip list
