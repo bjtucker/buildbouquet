@@ -9,6 +9,15 @@ on:
       - main
 
 jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/igorshubovych/markdownlint-cli:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Lint markdown files
+        run: markdownlint *.md
   debug:
     runs-on: ubuntu-latest
     container:
