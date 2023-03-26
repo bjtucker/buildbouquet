@@ -12,7 +12,7 @@ jobs:
   debug:
     runs-on: ubuntu-latest
     container:
-      image: python:3.9
+      image: node:16
     steps:
       - name: Print PATH
         run: echo $PATH
