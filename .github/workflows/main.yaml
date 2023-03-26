@@ -1,4 +1,4 @@
-name: Lint README
+name: Lint Markdown Files
 
 on:
   pull_request:
@@ -17,33 +17,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Lint markdown files
-        run: markdownlint *.md
-  debug:
-    runs-on: ubuntu-latest
-    container:
-      image: node:16
-    steps:
-      - name: Print PATH
-        run: echo $PATH
-      - name: Check installed npm packages
-        run: npm list -g --depth=0
-      - name: Install markdownlint-cli
-        run: npm install -g markdownlint-cli
-      - name: Check installed npm packages after installation
-        run: npm list -g --depth=0
-      - name: Lint README.md
-        run: markdownlint-cli README.md
-  lint:
-    runs-on: ubuntu-latest
-    container:
-      image: node:16
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install -g markdownlint-cli
-
-      - name: Lint README.md
-        run: markdownlint-cli README.md
+        run: markdownlint **/*.md
