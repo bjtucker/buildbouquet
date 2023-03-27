@@ -1,4 +1,4 @@
-name: Lint README
+name: Lint Markdown Files
 
 on:
   pull_request:
@@ -9,19 +9,12 @@ on:
       - main
 
 jobs:
-  lint:
+  markdownlint:
     runs-on: ubuntu-latest
     container:
-      image: python:3.9
-
+      image: ghcr.io/igorshubovych/markdownlint-cli:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Lint README.md
-        run: |
-          mdl README.md
+      - name: Lint markdown files
+        run: markdownlint **/*.md
