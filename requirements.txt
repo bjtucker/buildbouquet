@@ -1,1 +1,1 @@
-markdownlint
+markdownlint-py
