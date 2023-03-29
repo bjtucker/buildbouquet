@@ -17,7 +17,7 @@ jobs:
       - name: Print directory structure
         run: ls -laR
       - name: Print directory structure
-        run: ls -la /home/runner/work/buildbouquet/buildbouquet/.github/terraform
+        run: ls -la /home/runner/work/buildbouquet/buildbouquet/.github/workflows/terraform
 
 
       - name: Setup Terraform
@@ -29,7 +29,7 @@ jobs:
         with:
           tf_actions_version: "0.14.0"
           tf_actions_subcommand: "plan"
-          tf_actions_working_dir: /home/runner/work/buildbouquet/buildbouquet/.github/terraform
+          tf_actions_working_dir: /home/runner/work/buildbouquet/buildbouquet/.github/workflows/terraform
         env:
           GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
 
@@ -51,7 +51,7 @@ jobs:
         with:
           tf_actions_version: "0.14.0"
           tf_actions_subcommand: "init"
-          tf_actions_working_dir: /home/runner/work/buildbouquet/buildbouquet/.github/terraform
+          tf_actions_working_dir: /home/runner/work/buildbouquet/buildbouquet/.github/workflows/terraform
         env:
           GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
       - name: Terraform Apply
@@ -59,6 +59,6 @@ jobs:
         with:
           tf_actions_version: "0.14.0"
           tf_actions_subcommand: "apply -auto-approve"
-          tf_actions_working_dir: /home/runner/work/buildbouquet/buildbouquet/.github/terraform
+          tf_actions_working_dir: /home/runner/work/buildbouquet/buildbouquet/.github/workflows/terraform
         env:
           GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
