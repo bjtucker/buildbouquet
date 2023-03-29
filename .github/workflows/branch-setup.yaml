@@ -26,7 +26,14 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: '1.0.9'
-      - name: Terraform Plan
+      - name: Terraform Init
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: "0.14.0"
+          tf_actions_subcommand: "init"
+          tf_actions_working_dir: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}      - name: Terraform Plan
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: "0.14.0"
