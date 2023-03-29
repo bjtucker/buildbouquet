@@ -1,7 +1,7 @@
 provider "github" {}
 
 data "github_repository" "current" {
-  full_name = "${{ github.repository }}"
+  full_name = github.repository
 }
 
 resource "github_branch_protection" "main" {
