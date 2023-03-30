@@ -6,7 +6,7 @@ resource "github_repository" "main" {
 }
 
 data "github_repository" "current" {
-  full_name = "${github_repository.main.full_name}"
+  full_name = "github_repository.main.full_name"
 }
 
 resource "github_branch_protection" "main" {
