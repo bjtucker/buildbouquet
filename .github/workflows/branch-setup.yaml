@@ -12,16 +12,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
-      - name: tree
-        run: tree
-      - name: Print pwd
-        run: pwd
-      - name: Print directory structure
-        run: ls -laR
-      - name: Print directory structure
-        run: ls -la /home/runner/work/buildbouquet/buildbouquet/.github/workflows/terraform
-
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -42,7 +32,14 @@ jobs:
           tf_actions_working_dir: .github/terraform
         env:
           GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
-
+      - name: Terraform Validate
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: "0.14.0"
+          tf_actions_subcommand: "validate"
+          tf_actions_working_dir: .github/terraform
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
 
   terraform-apply:
     runs-on: ubuntu-latest
@@ -69,6 +66,14 @@ jobs:
         with:
           tf_actions_version: "0.14.0"
           tf_actions_subcommand: "apply -auto-approve"
+          tf_actions_working_dir: .github/terraform
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
+      - name: Terraform Validate
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: "0.14.0"
+          tf_actions_subcommand: "validate"
           tf_actions_working_dir: .github/terraform
         env:
           GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
