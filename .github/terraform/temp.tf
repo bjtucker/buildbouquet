@@ -1,12 +1,12 @@
 provider "github" {}
 
 data "github_repository" "current" {
-  full_name = "github.repository"
+  full_name = "${github.repository}"
 }
 
 resource "github_branch_protection" "main" {
   repository_id = data.github_repository.current.id
-  branch        = "main"
+  pattern       = "main"
 
   required_status_checks {
     strict = true
