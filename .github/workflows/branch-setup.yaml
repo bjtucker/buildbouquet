@@ -7,11 +7,17 @@ on:
 jobs:
   terraform-plan:
     runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 16.x
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -40,3 +46,35 @@ jobs:
           tf_actions_working_dir: .github/terraform
         env:
           GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
+
+  terraform-apply:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    env:
+      NODE_VERSION: 16.x
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: 'refs/heads/main'
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: '1.0.9'
+      - name: Terraform Init
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: "0.14.0"
+          tf_actions_subcommand: "init"
+          tf_actions_working_dir: .github/terraform
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
+      - name: Terraform Apply
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: "0.14.0"
+          tf_actions
