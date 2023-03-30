@@ -1,12 +1,7 @@
 provider "github" {}
 
-resource "github_repository" "main" {
-  name = "bjtucker/buildbouquet"
-  // Add any other required arguments for the resource
-}
-
 data "github_repository" "current" {
-  full_name = github_repository.main.full_name
+  full_name = "bjtucker/buildbouquet"
 }
 
 resource "github_branch_protection" "main" {
