@@ -49,6 +49,8 @@ jobs:
 
   terraform-apply:
     runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 16.x
     if: github.event.pull_request.merged == true
     steps:
       - name: Checkout
