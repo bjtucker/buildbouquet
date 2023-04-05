@@ -1,9 +1,9 @@
-import stackexchange
+#import stackexchange
 import os
 import openai
 
 # First, set up the Stack Exchange API with your access token
-so = stackexchange.Site(stackexchange.StackOverflow, os.environ["STACK_EXCHANGE_ACCESS_TOKEN"])
+#so = stackexchange.Site(stackexchange.StackOverflow, os.environ["STACK_EXCHANGE_ACCESS_TOKEN"])
 
 # Define a prompt for ChatGPT to generate text from
 prompt = """
@@ -42,9 +42,10 @@ for issue in issues:
         )
         suggested_fix = response.choices[0].text.strip()
         # Search for relevant Stack Overflow posts
-        search_results = so.search(suggested_fix)
+        #search_results = so.search(suggested_fix)
         # Collect links to the top 3 search results
-        links = [result.link for result in search_results[:3]]
+        #links = [result.link for result in search_results[:3]]
+        links = ["http://fake.stack.exchange.com/aaaa", "http://fake.stackexchange.com/bbbb"]
         # Check if the issue already has a comment with Stack Overflow links
         has_comment = False
         for comment in issue.get_comments():
