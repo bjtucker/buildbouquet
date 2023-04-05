@@ -10,6 +10,15 @@ resource "github_branch_protection" "main" {
     dismiss_stale_reviews = false
     require_code_owner_reviews = false
   }
+  
+  required_status_checks {
+    strict = true
+    contexts = [
+      "Lint Markdown Files / markdownlint",
+      "branch-setup / terraform-plan",
+    ]
+  }
+
 
   lifecycle {
     create_before_destroy = true
