@@ -1,3 +1,7 @@
+data "github_repository" "current" {
+  name = "bjtucker/buildbouquet"
+}
+
 resource "github_branch_protection" "main" {
   repository_id = data.github_repository.current.id
   pattern       = "main"
