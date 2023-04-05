@@ -3,7 +3,7 @@ data "github_repository" "current" {
 }
 
 resource "github_branch_protection" "main" {
-  repository_id = data.github_repository.current.id
+  repository_id = data.github_repository.current.node_id
   pattern       = "main"
 
   required_pull_request_reviews {
