@@ -1,5 +1,5 @@
 data "github_repository" "current" {
-  name = "bjtucker/buildbouquet"
+  name = "buildbouquet"
 }
 
 resource "github_branch_protection" "main" {
