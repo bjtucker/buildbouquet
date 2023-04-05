@@ -1,26 +1,26 @@
-provider "github" {}
-
 data "github_repository" "current" {
-  full_name = "bjtucker/buildbouquet"
+  name = "buildbouquet"
 }
 
 resource "github_branch_protection" "main" {
-  repository_id = data.github_repository.current.id
+  repository_id = data.github_repository.current.node_id
   pattern       = "main"
 
+  required_pull_request_reviews {
+    dismiss_stale_reviews = false
+    require_code_owner_reviews = false
+  }
+  
   required_status_checks {
     strict = true
     contexts = [
-      "continuous-integration",
+      "Lint Markdown Files / markdownlint",
+      "branch-setup / terraform-plan",
     ]
   }
 
-  enforce_admins = true
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes = [
-      enforce_admins,
-    ]
   }
 }
