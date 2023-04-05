@@ -1,0 +1,24 @@
+name: Issue Commenter
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run script
+        run: python issue_commenter.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
+          STACK_EXCHANGE_ACCESS_TOKEN: ${{ secrets.BUILDBOUQUET_STACK_EXCHANGE_ACCESS_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.BUILDBOUQUET_OPENAI_API_KEY }}
