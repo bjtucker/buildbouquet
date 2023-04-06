@@ -1,7 +1,9 @@
+from unittest.mock import patch
 import issue_commenter
 
-def test_get_issue_links():
+def test_get_issue_links_with_mock_token():
 
+    # Define test variables
     issue = {
         "title": "Test Issue Title",
         "body": "Test Issue Body",
@@ -16,6 +18,11 @@ def test_get_issue_links():
     }
 
     expected_links = ["http://fake.stack.exchange.com/aaaa", "http://fake.stackexchange.com/bbbb"]
-    links = issue_commenter.get_issue_links(issue)
 
-    assert links == expected_links
+    # Mock the environment variable
+    with patch.dict('os.environ', {'GITHUB_TOKEN': 'mock_token'}):
+        # Call the function to get links
+        links = issue_commenter.get_issue_links(issue)
+
+        # Assert that the links match the expected output
+        assert links == expected_links
