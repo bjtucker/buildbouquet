@@ -8,8 +8,10 @@ on:
     branches:
       - main
 
+# todo: ensure markdownlint does not run unless markdown files were changed
 jobs:
   markdownlint:
+    if: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && contains(github.event.head_commit.modified, '.md') ) }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/igorshubovych/markdownlint-cli:latest
