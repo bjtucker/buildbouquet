@@ -36,13 +36,19 @@ def get_issue_links(issue):
     links = ["http://fake.stack.exchange.com/aaaa", "http://fake.stackexchange.com/bbbb"]
     return links
 
+def get_issues():
+    # Authenticate with the GitHub API using the token
+    g = Github(os.environ["GITHUB_TOKEN"])
 
-# Authenticate with the GitHub API using the token
-g = Github(os.environ["GITHUB_TOKEN"])
-repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
+    # Get the repository object for the specified repository
+    repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
 
-# Get the list of issues that triggered the action
-issues = repo.get_issues(state="open", labels=["bug"])
+    # Get the list of issues that triggered the action
+    issues = repo.get_issues(state="open")
+
+    return issues
+
+issues = get_issues()
 
 # Iterate over the issues and add a comment with relevant Stack Overflow links for each one
 for issue in issues:
