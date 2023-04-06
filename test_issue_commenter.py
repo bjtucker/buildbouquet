@@ -1,11 +1,8 @@
 from unittest.mock import patch
 
+with patch.dict('os.environ', {'GITHUB_TOKEN': 'mock_token'}):
+    from issue_commenter import get_issue_links
 
-from issue_commenter import get_issue_links
-
-# Mock the environment variable
-# with patch.dict('os.environ', {'GITHUB_TOKEN': 'mock_token'}):
-#     import issue_commenter
 
 def test_get_issue_links_with_mock_token():
     # Define test variables
