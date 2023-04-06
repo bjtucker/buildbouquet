@@ -1,6 +1,7 @@
-#import stackexchange
 import os
 import openai
+import requests
+from github import Github
 
 # First, set up the Stack Exchange API with your access token
 #so = stackexchange.Site(stackexchange.StackOverflow, os.environ["STACK_EXCHANGE_ACCESS_TOKEN"])
@@ -21,6 +22,13 @@ Here are some Stack Overflow posts that may be helpful:
 
 {}
 """
+
+# Authenticate with the GitHub API using the token
+g = Github(os.environ["GITHUB_TOKEN"])
+repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
+
+# Get the list of issues that triggered the action
+issues = repo.get_issues(state="open", labels=["bug"])
 
 # Iterate over the issues and add a comment with relevant Stack Overflow links for each one
 for issue in issues:
@@ -57,4 +65,3 @@ for issue in issues:
             issue.create_comment("Here are some Stack Overflow posts that may be helpful:\n\n" + "\n".join(links))
     except Exception as e:
         print(f"Error occurred while generating response for issue {issue.number}: {e}")
-
