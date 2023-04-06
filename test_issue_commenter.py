@@ -1,4 +1,5 @@
 from unittest.mock import patch
+import os
 
 # TODO: mock get_issues function to return an empty list for this test
 with patch('issue_commenter.get_issues', return_value=[]):
