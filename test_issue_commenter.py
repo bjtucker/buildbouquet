@@ -1,7 +1,9 @@
 from unittest.mock import patch
 
-with patch.dict('os.environ', {'GITHUB_TOKEN': 'mock_token'}):
-    from issue_commenter import get_issue_links
+# TODO: mock get_issues function to return an empty list for this test
+with patch('issue_commenter.get_issues', return_value=[]):
+    with patch.dict('os.environ', {'GITHUB_TOKEN': 'mock_token'}):
+        from issue_commenter import get_issue_links
 
 
 def test_get_issue_links_with_mock_token():
