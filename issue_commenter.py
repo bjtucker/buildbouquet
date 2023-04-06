@@ -48,7 +48,7 @@ def get_issues():
 
     return issues
 
-print(os.environ))
+print(os.environ)
 
 issues = get_issues()
 
