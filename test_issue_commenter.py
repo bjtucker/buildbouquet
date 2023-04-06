@@ -1,4 +1,4 @@
-from .. import issue_commenter
+import issue_commenter
 
 def test_get_issue_links():
 
