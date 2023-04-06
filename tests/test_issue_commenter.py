@@ -1,24 +1,24 @@
-def test_create_prompt():
-    title = "Test issue title"
-    body = "Test issue body"
-    comments = ["Comment 1", "Comment 2"]
-    prompt = create_prompt(title, body, comments)
-    expected_prompt = f"""
-Here's an issue from the GitHub repository:
+def test_issue_commenter():
+    from issue_commenter import get_issue_links
 
-Title: {title}
+    issue = {
+        "title": "Test Issue Title",
+        "body": "Test Issue Body",
+        "comments": [
+            {
+                "body": "Test Comment 1"
+            },
+            {
+                "body": "Test Comment 2"
+            }
+        ]
+    }
 
-Body: {body}
+    expected_links = ["http://fake.stack.exchange.com/aaaa", "http://fake.stackexchange.com/bbbb"]
+    links = get_issue_links(issue)
 
-Comments: {' '.join(comments)}
+    assert links == expected_links
 
-Suggest a fix or refactoring task for this issue:
-
-Here are some Stack Overflow posts that may be helpful:
-
-{{}}
-"""
-    assert prompt == expected_prompt
 
 
 def test_response_generation():
