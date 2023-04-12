@@ -1,0 +1,16 @@
+
+name: ChatGPT Review
+
+on: [pull_request]
+
+
+jobs:
+  chatgpt-review:
+    name: ChatGPT Review
+    runs-on: ubuntu-latest
+    steps:
+    - uses: feiskyer/ChatGPT-Reviewer@v0
+      name: ChatGPT Review
+      env:
+        GITHUB_TOKEN: ${{ secrets.BUILDBOUQUET_GITHUB_MANAGEMENT_TOKEN }}
+        OPENAI_API_KEY: ${{ secrets.OPENAPI_KEY }}
