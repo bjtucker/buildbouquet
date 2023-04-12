@@ -1,8 +1,6 @@
-
 name: ChatGPT Review
 
 on: [pull_request]
-
 
 jobs:
   chatgpt-review:
